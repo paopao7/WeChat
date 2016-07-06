@@ -22,6 +22,12 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIWebView * view = [[UIWebView alloc]initWithFrame:self.view.frame];
+    
+    [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.itinfor.cn"]]];
+    
+    [self.view addSubview:view];
+    
     
 //    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
     

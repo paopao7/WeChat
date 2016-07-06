@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92715261D2D6C3300D7E490 /* login_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C92715241D2D6C3300D7E490 /* login_btn@2x.png */; };
+		C927152A1D2D6FB700D7E490 /* login_btn_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C92715291D2D6FB700D7E490 /* login_btn_selected@2x.png */; };
 		C9967F7D1D2B942A005A616C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9967F7C1D2B942A005A616C /* main.m */; };
 		C9967F801D2B942A005A616C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9967F7F1D2B942A005A616C /* AppDelegate.m */; };
 		C9967F831D2B942A005A616C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9967F821D2B942A005A616C /* ViewController.m */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C92715241D2D6C3300D7E490 /* login_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn@2x.png"; sourceTree = "<group>"; };
+		C92715291D2D6FB700D7E490 /* login_btn_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_btn_selected@2x.png"; sourceTree = "<group>"; };
 		C9967F781D2B942A005A616C /* demo_UINavigationController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo_UINavigationController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9967F7C1D2B942A005A616C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9967F7E1D2B942A005A616C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		C9967FB71D2BBA9A005A616C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C92715291D2D6FB700D7E490 /* login_btn_selected@2x.png */,
+				C92715241D2D6C3300D7E490 /* login_btn@2x.png */,
 				C9967FC01D2BCA55005A616C /* login_item@2x.png */,
 			);
 			name = images;
@@ -277,8 +283,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C927152A1D2D6FB700D7E490 /* login_btn_selected@2x.png in Resources */,
 				C9967F8B1D2B942A005A616C /* LaunchScreen.storyboard in Resources */,
 				C9967FC11D2BCA55005A616C /* login_item@2x.png in Resources */,
+				C92715261D2D6C3300D7E490 /* login_btn@2x.png in Resources */,
 				C9967F881D2B942A005A616C /* Assets.xcassets in Resources */,
 				C9967F861D2B942A005A616C /* Main.storyboard in Resources */,
 			);

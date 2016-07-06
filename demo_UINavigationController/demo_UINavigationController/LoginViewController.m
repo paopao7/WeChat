@@ -40,9 +40,9 @@
     //登录view
     UIView *login_view = [[UIView alloc] initWithFrame:CGRectMake(10, 100, 320, 40)];
     
-    login_view.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00].CGColor;
+//    login_view.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00].CGColor;
     
-    login_view.layer.borderWidth = 1.0;
+//    login_view.layer.borderWidth = 1.0;
     
     
     
@@ -57,12 +57,12 @@
     username.textAlignment = NSTextAlignmentLeft;
     
     
-    username.font = [UIFont boldSystemFontOfSize:18.0];
+    username.font = [UIFont boldSystemFontOfSize:16.0];
     
     username.textColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.00];
     
     [login_view addSubview:username];
-
+    
     
     
     
@@ -77,9 +77,25 @@
     
     username_input.placeholder = @"请输入账号";
     
-    [username_input setValue:[UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+    [username_input setValue:[UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+    
+    [username_input setValue:[UIFont boldSystemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
     
     [login_view addSubview:username_input];
+    
+    
+    
+    
+    
+    //账号下的横线
+    UIView *username_line = [[UIView alloc] initWithFrame:CGRectMake(5, 35, 315, 1)];
+    
+    [username_line setBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00]];
+    
+    [login_view addSubview:username_line];
+    
+    [username_line release];
+
     
     
     
@@ -87,9 +103,9 @@
     //密码view
     UIView *password_view = [[UIView alloc] initWithFrame:CGRectMake(10, 150, 320, 40)];
     
-    password_view.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00].CGColor;
-    
-    password_view.layer.borderWidth = 1.0;
+//    password_view.layer.borderColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00].CGColor;
+//    
+//    password_view.layer.borderWidth = 1.0;
     
     
     
@@ -101,13 +117,13 @@
     
     password.textAlignment = NSTextAlignmentLeft;
     
-    password.font = [UIFont boldSystemFontOfSize:14.0];
+    password.font = [UIFont boldSystemFontOfSize:16.0];
     
     password.textColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.00];
     
     [password_view addSubview:password];
     
-
+    
     
     
     
@@ -120,16 +136,37 @@
     
     password_input.placeholder = @"请输入密码";
     
+    [password_input setValue:[UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+    
+    [password_input setValue:[UIFont boldSystemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
+    
     password_input.secureTextEntry = YES;
     
     [password_view addSubview:password_input];
     
     
     
+    //密码下的横线
+    UIView *password_line = [[UIView alloc] initWithFrame:CGRectMake(5, 85, 315, 1)];
+    
+    [password_line setBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00]];
+    
+    [login_view addSubview:password_line];
+    
+    [password_line release];
+    
+    
+    
+    
+    
     //登录按钮
     UIButton *login_btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 230, 300, 50)];
     
-    login_btn.backgroundColor = [UIColor colorWithRed:0.06 green:0.8 blue:0.05 alpha:1.00];
+//    login_btn.backgroundColor = [UIColor colorWithRed:0.06 green:0.8 blue:0.05 alpha:1.00];
+    
+    [login_btn setBackgroundImage:[UIImage imageNamed:@"login_btn"] forState:UIControlStateNormal];
+    
+    [login_btn setBackgroundImage:[UIImage imageNamed:@"login_btn_selected"] forState:UIControlStateSelected];
     
     [login_btn setTitle:@"登录" forState:UIControlStateNormal];
     
@@ -139,7 +176,7 @@
     //设置边框大小
     [login_btn.layer setBorderWidth:1.0];
     
-    login_btn.layer.borderColor = [UIColor colorWithRed:0.06 green:0.75 blue:0.05 alpha:1.00].CGColor;
+    login_btn.layer.borderColor = [UIColor colorWithRed:0.06 green:0.62 blue:0.02 alpha:1.00].CGColor;
     
     
     
@@ -155,20 +192,30 @@
     
     
     //登录遇到问题UILabel
-//    UILabel *question_label = [[UILabel alloc] initWithFrame:CGRectMake(110, 300, 100, 20)];
-//    
-//    question_label.font = [UIFont boldSystemFontOfSize:14.0];
-//    
-//    question_label.textColor = [UIColor colorWithRed:0.40 green:0.47 blue:0.62 alpha:1.00];
-//    
-//    question_label.text = @"登录遇到问题?";
-//    
+    //    UILabel *question_label = [[UILabel alloc] initWithFrame:CGRectMake(110, 300, 100, 20)];
+    //
+    //    question_label.font = [UIFont boldSystemFontOfSize:14.0];
+    //
+    //    question_label.textColor = [UIColor colorWithRed:0.40 green:0.47 blue:0.62 alpha:1.00];
+    //
+    //    question_label.text = @"登录遇到问题?";
+    //
     //下划线
-//    NSDictionary *attribtDic = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-//    
-//    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:@"登录遇到问题?" attributes:attribtDic];
-//    
-//    question_btn.attributedText = attribtStr;
+    //    NSDictionary *attribtDic = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    //
+    //    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:@"登录遇到问题?" attributes:attribtDic];
+    //
+    //    question_btn.attributedText = attribtStr;
+    
+    
+
+    UIView *question_line = [[UIView alloc] initWithFrame:CGRectMake(105, 87, 90, 1)];
+    
+    [question_line setBackgroundColor:[UIColor colorWithRed:0.40 green:0.47 blue:0.62 alpha:1.00]];
+    
+    [login_btn addSubview:question_line];
+    
+    [question_line release];
     
     
     //登录遇到问题 绑定操作
@@ -182,10 +229,10 @@
     [self.view addSubview:login_btn];
     [self.view addSubview:question_btn];
     
-//    [self.view addSubview:username];
-//    [self.view addSubview:username_input];
-//    [self.view addSubview:password];
-//    [self.view addSubview:password_input];
+    //    [self.view addSubview:username];
+    //    [self.view addSubview:username_input];
+    //    [self.view addSubview:password];
+    //    [self.view addSubview:password_input];
 }
 
 
@@ -210,13 +257,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
