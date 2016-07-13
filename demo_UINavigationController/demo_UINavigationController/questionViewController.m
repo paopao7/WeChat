@@ -6,13 +6,13 @@
 //  Copyright © 2016年 钱超. All rights reserved.
 //
 
-#import "questionViewController.h"
+#import "QuestionViewController.h"
 
-@interface questionViewController ()
+@interface QuestionViewController ()
 
 @end
 
-@implementation questionViewController
+@implementation QuestionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

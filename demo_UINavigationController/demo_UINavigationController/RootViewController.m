@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "SecondViewController.h"
 #import "LoginViewController.h"
+#import "PersonViewController.h"
 
 @interface RootViewController ()
 
@@ -18,6 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //读取本地数据
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    
+    NSString *name = [defaults stringForKey:@"usernames"];//根据键值取出name
+    
+    NSLog(@"%@",name);
     
     [self.navigationController.navigationBar setTranslucent:NO];
     
@@ -29,7 +37,11 @@
     
     login_btn.frame = CGRectMake(0, 0, 24, 24);
     
-    [login_btn setBackgroundImage:[UIImage imageNamed:@"login_item"] forState:UIControlStateNormal];
+    if(name==nil){
+        [login_btn setBackgroundImage:[UIImage imageNamed:@"login_item"] forState:UIControlStateNormal];
+    }else{
+        [login_btn setBackgroundImage:[UIImage imageNamed:@"login_item_selected"] forState:UIControlStateNormal];
+    }
     
     [login_btn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     
@@ -64,11 +76,24 @@
 }
 
 - (void) login{
-    LoginViewController *login = [[LoginViewController alloc] init];
+    //读取本地数据
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
     
-    [self.navigationController pushViewController:login animated:YES];
+    NSString *name = [defaults stringForKey:@"usernames"];//根据键值取出name
     
-    [login release];
+    if(name == nil){
+        LoginViewController *login = [[LoginViewController alloc] init];
+    
+        [self.navigationController pushViewController:login animated:YES];
+    
+        [login release];
+    }else{
+        PersonViewController *person = [[PersonViewController alloc] init];
+        
+        [self.navigationController pushViewController:person animated:YES];
+        
+        [person release];
+    }
 }
 
 - (void) clicked{

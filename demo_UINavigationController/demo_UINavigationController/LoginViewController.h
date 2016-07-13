@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController{
+    //HUD（Head-Up Display，意思是抬头显示的意思）
+    MBProgressHUD *HUD;
+}
+
 
 @end

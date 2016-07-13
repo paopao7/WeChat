@@ -7,7 +7,8 @@
 //
 
 #import "LoginViewController.h"
-#import "questionViewController.h"
+#import "QuestionViewController.h"
+
 
 @interface LoginViewController ()
 
@@ -17,8 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    // Do any additional setup after loading the view.    
     self.title = @"登录";
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -26,13 +26,13 @@
     
     
     //登录页面标题
-    UILabel *login_title = [[UILabel alloc] initWithFrame:CGRectMake(50, 50, 220, 20)];
+    UILabel *login_title = [[UILabel alloc] initWithFrame:CGRectMake((self.view.bounds.size.width-218)/2, 50, 218, 20)];
     
     login_title.font = [UIFont boldSystemFontOfSize:24];
     
     login_title.textColor = [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1.00];
     
-    login_title.textAlignment = UITextAlignmentCenter;
+//    login_title.textAlignment = UITextAlignmentCenter;
     
     login_title.text = @"使用账号和密码登录";
     
@@ -81,6 +81,8 @@
     
     [username_input setValue:[UIFont boldSystemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
     
+    username_input.tag = 100;
+    
     [login_view addSubview:username_input];
     
     
@@ -88,7 +90,7 @@
     
     
     //账号下的横线
-    UIView *username_line = [[UIView alloc] initWithFrame:CGRectMake(5, 35, 315, 1)];
+    UIView *username_line = [[UIView alloc] initWithFrame:CGRectMake(5, 35, self.view.bounds.size.width-5, 1)];
     
     [username_line setBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00]];
     
@@ -142,12 +144,14 @@
     
     password_input.secureTextEntry = YES;
     
+    password_input.tag = 101;
+    
     [password_view addSubview:password_input];
     
     
     
     //密码下的横线
-    UIView *password_line = [[UIView alloc] initWithFrame:CGRectMake(5, 85, 315, 1)];
+    UIView *password_line = [[UIView alloc] initWithFrame:CGRectMake(5, 85, self.view.bounds.size.width-5, 1)];
     
     [password_line setBackgroundColor:[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00]];
     
@@ -160,7 +164,7 @@
     
     
     //登录按钮
-    UIButton *login_btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 230, 300, 50)];
+    UIButton *login_btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 230, self.view.bounds.size.width-20, 50)];
     
 //    login_btn.backgroundColor = [UIColor colorWithRed:0.06 green:0.8 blue:0.05 alpha:1.00];
     
@@ -169,6 +173,8 @@
     [login_btn setBackgroundImage:[UIImage imageNamed:@"login_btn_selected"] forState:UIControlStateSelected];
     
     [login_btn setTitle:@"登录" forState:UIControlStateNormal];
+    
+    [login_btn addTarget:self action:@selector(press_login) forControlEvents:UIControlEventTouchUpInside];
     
     //设置圆角2度
     [login_btn.layer setCornerRadius:5.0];
@@ -182,7 +188,7 @@
     
     
     //登录遇到问题
-    UIButton *question_btn = [[UIButton alloc] initWithFrame:CGRectMake(110, 300, 100, 20)];
+    UIButton *question_btn = [[UIButton alloc] initWithFrame:CGRectMake((self.view.bounds.size.width-100)/2, 300, 100, 20)];
     
     [question_btn setTitle:@"登录遇到问题?" forState:UIControlStateNormal];
     
@@ -209,7 +215,7 @@
     
     
 
-    UIView *question_line = [[UIView alloc] initWithFrame:CGRectMake(105, 87, 90, 1)];
+    UIView *question_line = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width-110)/2, 87, 90, 1)];
     
     [question_line setBackgroundColor:[UIColor colorWithRed:0.40 green:0.47 blue:0.62 alpha:1.00]];
     
@@ -242,9 +248,96 @@
     [self.view endEditing:YES];
 }
 
+
+//点击登录按钮
+- (void) press_login{
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    
+    [self.view addSubview:HUD];
+    
+    
+    UITextField *username_textfield = [self.view viewWithTag:100];
+    
+    NSString *usernames = username_textfield.text;
+    
+    UITextField *password_textfield = [self.view viewWithTag:101];
+    
+    NSString *passwords = password_textfield.text;
+    
+    
+    if([usernames isEqualToString:@""]){
+        HUD.labelText = @"账号不能为空";
+        
+        HUD.mode = MBProgressHUDModeText;
+        
+        [HUD showAnimated:YES whileExecutingBlock:^{
+            sleep(1);
+        }];
+    }else if([passwords isEqualToString:@""]){
+        HUD.labelText = @"密码不能为空";
+        
+        HUD.mode = MBProgressHUDModeText;
+        
+        [HUD showAnimated:YES whileExecutingBlock:^{
+            sleep(1);
+        }];
+    }else{
+        //提交url相关
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        
+        NSDictionary *parameters = @{@"username": usernames,@"password": passwords};
+        
+        [manager POST:@"http://www.itinfor.cn/login.php" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+            NSString *status = [responseObject valueForKeyPath:@"status"];
+            
+            NSString *message = [responseObject valueForKeyPath:@"message"];
+            
+            
+            if([status isEqualToString:@"success"]){
+                //将用户名写入本地
+                NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+                
+                [defaults setObject:usernames forKey:@"usernames"];
+                
+                HUD.labelText = message;
+                
+                HUD.mode = MBProgressHUDModeText;
+                
+                [HUD showAnimated:YES whileExecutingBlock:^{
+                    sleep(1);
+                }];
+                
+                [self performSelector:@selector(auto_back) withObject:nil afterDelay:2.0];
+            }else{
+                HUD.labelText = message;
+                
+                HUD.mode = MBProgressHUDModeText;
+                
+                [HUD showAnimated:YES whileExecutingBlock:^{
+                    sleep(1);
+                }];
+            }
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+    }
+
+
+}
+
+//自动返回
+- (void) auto_back{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 //登录遇到问题 绑定操作
 - (void) open_question{
-    UIViewController *questions = [[questionViewController alloc] init];
+    UIViewController *questions = [[QuestionViewController alloc] init];
     
     [self.navigationController pushViewController:questions animated:YES];
     
