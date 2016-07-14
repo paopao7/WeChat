@@ -10,6 +10,7 @@
 #import "SecondViewController.h"
 #import "LoginViewController.h"
 #import "PersonViewController.h"
+#import "MasonryViewController.h"
 
 @interface RootViewController ()
 
@@ -70,6 +71,15 @@
 //    self.navigationItem.titleView = segment;
     
     
+    UIButton *masonry_btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 140, 30)];
+    
+    [masonry_btn setBackgroundColor:[UIColor orangeColor]];
+    
+    [masonry_btn setTitle:@"goto_masonry" forState:UIControlStateNormal];
+    
+    [masonry_btn addTarget:self action:@selector(goto_masonry) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:masonry_btn];
     
     
     // Do any additional setup after loading the view.
@@ -106,6 +116,11 @@
     [second release];
 }
 
+- (void) goto_masonry{
+    MasonryViewController *masonry = [[MasonryViewController alloc] init];
+    
+    [self.navigationController pushViewController:masonry animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
